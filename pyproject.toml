@@ -1,0 +1,71 @@
+[project]
+
+name = "wrfpp"
+description = "A package to facilitate the analysis of WRF and WRF-Chem outputs."
+version = "development"
+
+authors = [
+  {
+    name="The WRF-Chem-Polar development team at LATMOS and IGE",
+    email="wrf-chem-polar@univ-grenoble-alpes.fr",
+  },
+]
+
+maintainers = [
+    {name="Lucas Bastien", email="wrf-chem-polar@univ-grenoble-alpes.fr"},
+]
+
+license = "BSD-3-Clause"
+license-files = ["LICENSE"]
+
+readme = {file="README.md", content-type="text/markdown"}
+
+keywords = ["WRF", "WRF-Chem", "post-processing"]
+
+requires-python = ">=3.9"
+
+dependencies = [
+    "netcdf4",
+    "scipy",
+    "xarray",
+]
+
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Operating System :: OS Independent",
+    "Intended Audience :: Science/Research",
+    "Natural Language :: English",
+    "Topic :: Scientific/Engineering :: Atmospheric Science",
+]
+
+[project.optional-dependencies]
+
+more-features = [
+    "pyproj",
+    "cartopy",
+]
+
+more-performance = [
+    "dask",
+]
+
+[project.urls]
+
+Homepage = "https://github.com/WRF-Chem-Polar/wrfpp"
+Issues = "https://github.com/WRF-Chem-Polar/wrfpp/issues"
+
+[build-system]
+
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.ruff]
+
+line-length = 79
