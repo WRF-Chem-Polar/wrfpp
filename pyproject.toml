@@ -48,6 +48,7 @@ classifiers = [
 [project.optional-dependencies]
 
 more-features = [
+    "pandas",
     "pyproj",
     "cartopy",
 ]
