@@ -134,7 +134,7 @@ def _is_iterable(obj):
     return True
 
 
-def _chech_optional_imports(*imports):
+def _check_optional_imports(*imports):
     """Decorator that checks the successful import of optional dependencies.
 
     Parameters
@@ -144,7 +144,7 @@ def _chech_optional_imports(*imports):
 
     """
 
-    def _decorator_chech_optional_imports(func):
+    def _decorator_check_optional_imports(func):
         @functools.wraps(func)
         def wrapper(*args, **kwargs):
             for imp in imports:
@@ -157,10 +157,10 @@ def _chech_optional_imports(*imports):
 
         return wrapper
 
-    return _decorator_chech_optional_imports
+    return _decorator_check_optional_imports
 
 
-@_chech_optional_imports("pyproj")
+@_check_optional_imports("pyproj")
 def _transformer_from_crs(crs, reverse=False):
     """Return the pyproj Transformer corresponding to given CRS.
 
@@ -423,7 +423,7 @@ class WRFDatasetAccessor(GenericDatasetAccessor):
     # Facilities for handling geographical projections
 
     @property
-    @_chech_optional_imports("pyproj")
+    @_check_optional_imports("pyproj")
     def crs_pyproj(self):
         """The pyproj CRS corresponding to dataset."""
         if self.attrs["POLE_LON"] != 0:
@@ -489,7 +489,7 @@ class WRFDatasetAccessor(GenericDatasetAccessor):
         return pyproj.CRS.from_dict(proj)
 
     @property
-    @_chech_optional_imports("pyproj", "cartopy")
+    @_check_optional_imports("pyproj", "cartopy")
     def crs_cartopy(self):
         """The cartopy CRS corresponding to dataset."""
         # We let self.crs_pyproj do all the quality checking
@@ -923,7 +923,7 @@ class WRFDatasetAccessor(GenericDatasetAccessor):
         return nbins
 
     @property
-    @_chech_optional_imports("pandas")
+    @_check_optional_imports("pandas")
     def aer_bins_info(self):
         """Information about the aerosol bins.
 
