@@ -1,0 +1,27 @@
+# Action to run Ruff formatting and checks on Python code.
+#
+# Copyright (c) 2025-2026 LATMOS (France, UMR 8190) and IGE (France, UMR 5001).
+
+name: Ruff
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - '**.py'
+jobs:
+  Ruff:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - name: Prepare Ruff
+        uses: astral-sh/ruff-action@v3
+        with:
+          version: "latest"
+          args: "--version"
+      - name: Run Ruff (check)
+        run: ruff check --diff .
+      - name: Run Ruff (format)
+        run: ruff format --diff .
