@@ -4,9 +4,6 @@ It was originally part of our [WRF-infra](https://github.com/WRF-Chem-Polar/WRF-
 
 It works with native WRF and WRF-Chem outputs as well as [WRF-Chem-Polar](https://github.com/WRF-Chem-Polar/WRF-Chem-Polar) outputs.
 
-> [!WARNING]
-> This repository is still under construction. Development of wrfpp is still ongoing in our [WRF-infra](https://github.com/WRF-Chem-Polar/WRF-infra) repository. Any version of wrfpp included here is for testing purposes only.
-
 # Authorship
 
 ## Institutions
