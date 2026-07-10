@@ -4,6 +4,10 @@ It was originally part of our [WRF-infra](https://github.com/WRF-Chem-Polar/WRF-
 
 It works with native WRF and WRF-Chem outputs as well as [WRF-Chem-Polar](https://github.com/WRF-Chem-Polar/WRF-Chem-Polar) outputs.
 
+# Versioning
+
+For reproducible computing, please only use commits tagged with a version number (eg. "v2.3"). These uniquely and unequivocally define specific versions of wrfpp. This is **not** true for any version number that has the ".dev0" suffix (eg "v2.3.dev0").
+
 # Authorship
 
 ## Institutions

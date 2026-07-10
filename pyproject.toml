@@ -2,7 +2,7 @@
 
 name = "wrfpp"
 description = "A package to facilitate the analysis of WRF and WRF-Chem outputs."
-version = "development"
+version = "1.0.dev0"
 
 authors = [
   {
