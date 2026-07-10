@@ -7,12 +7,12 @@ python -m venv my_env
 source my_env/bin/activate
 ```
 
-Then [clone](https://git-scm.com/docs/git-clone) and [install](https://docs.python.org/3/installing/index.html) wrfpp:
+Then [clone](https://git-scm.com/docs/git-clone) and [install](https://docs.python.org/3/installing/index.html) wrfpp with all dependencies:
 
 ```sh
 git clone https://github.com/WRF-Chem-Polar/wrfpp.git
 cd wrfpp
-python -m pip install -e .
+python -m pip install -e .[all]
 ```
 
 # Creating issues

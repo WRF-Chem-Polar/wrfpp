@@ -47,6 +47,10 @@ classifiers = [
 
 [project.optional-dependencies]
 
+all = [
+    "wrfpp[more-features,more-performance]",
+]
+
 more-features = [
     "pandas",
     "pyproj",
