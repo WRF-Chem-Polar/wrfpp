@@ -25,6 +25,8 @@ Anyone is welcome to create an issue to:
 
  - **ask for a new feature**. In this case, please explain carefuly why you think adding this feature is relevant for wrfpp, and suggest one or more usecase(s).
 
+As far as reasonably possible, each issue should describe a single non-divisible task or improvement. If your suggested improvement or feature can be divided into multiple smaller improvements/features/tasks, then create separate issues for each of these.
+
 # Making a pull request
 
 Before making a pull request, you must ensure that there exists a related issue. In other words, each pull request must be associated whith an existing issue. It is ok to have several pull requests associated with the same issue. The reverse is not ok. Create the issue if needed, following the instructions above.
