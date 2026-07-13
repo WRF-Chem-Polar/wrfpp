@@ -61,7 +61,7 @@ The guidelines for reviewing a pull request are:
 
 # Versioning
 
-We use version numbers formatted as major.minor. Each minor version will be git-tagged as such (eg. "v2.3"). Any commit in between two tagged minor or major versions will be tagged as a development version (".dev0") of the next minor version. For example, if the last tagged version is "v2.3", any subsequent commit until the next tagged version will use version "2.4.dev0". Only wrfpp maintainers may create stable versions and the associated tags.
+We use version numbers formatted as major.minor. Each minor version will be git-tagged as such (eg. "v2.3"). Any commit in between two tagged minor or major versions will be tagged as a development version (".dev0") of the next minor version. For example, if the last tagged version is "v2.3", any subsequent commit until the next tagged version will use version "v2.4.dev0". Only `wrfpp` maintainers may create stable versions and the associated tags.
 
 # Coding style
 
