@@ -5,10 +5,7 @@ description = "A package to facilitate the analysis of WRF and WRF-Chem outputs.
 version = "v1.0.dev0"
 
 authors = [
-  {
-    name="The WRF-Chem-Polar development team at LATMOS and IGE",
-    email="wrf-chem-polar@univ-grenoble-alpes.fr",
-  },
+    {name="The WRF-Chem-Polar development team at LATMOS and IGE", email="wrf-chem-polar@univ-grenoble-alpes.fr"},
 ]
 
 maintainers = [
