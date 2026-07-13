@@ -6,6 +6,9 @@ It works with native WRF and WRF-Chem outputs as well as [WRF-Chem-Polar](https:
 
 # Installing wrfpp
 
+> [!TIP]
+> We strongly encourage you to work within some kind of isolated Python environment (eg. [venv](https://docs.python.org/3/library/venv.html) or [conda](https://docs.conda.io/en/latest/))
+
 You can install `wrfpp` with `pip`. It is recommended to install a tagged version (eg. "v1.0"):
 
 ```sh
