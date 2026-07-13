@@ -2,7 +2,7 @@
 
 name = "wrfpp"
 description = "A package to facilitate the analysis of WRF and WRF-Chem outputs."
-version = "development"
+version = "v1.0.dev0"
 
 authors = [
   {
@@ -46,6 +46,10 @@ classifiers = [
 ]
 
 [project.optional-dependencies]
+
+all = [
+    "wrfpp[more-features,more-performance]",
+]
 
 more-features = [
     "pandas",
