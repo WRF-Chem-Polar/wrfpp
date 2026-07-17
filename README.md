@@ -4,6 +4,23 @@ It was originally part of our [WRF-infra](https://github.com/WRF-Chem-Polar/WRF-
 
 It works with native WRF and WRF-Chem outputs as well as [WRF-Chem-Polar](https://github.com/WRF-Chem-Polar/WRF-Chem-Polar) outputs.
 
+# Installing wrfpp
+
+> [!TIP]
+> We strongly encourage you to work within some kind of isolated Python environment (eg. [venv](https://docs.python.org/3/library/venv.html) or [conda](https://docs.conda.io/en/latest/))
+
+You can install `wrfpp` with `pip`. It is recommended to install a tagged version (eg. "v1.0"):
+
+```sh
+pip install git+https://github.com/WRF-Chem-Polar/wrfpp.git@v1.0#egg=wrfpp
+```
+
+To install the latest development version, simply omit the tag:
+
+```sh
+pip install git+https://github.com/WRF-Chem-Polar/wrfpp.git#egg=wrfpp
+```
+
 # Versioning
 
 For reproducible computing, please only use commits tagged with a version number (eg. "v2.3"). These uniquely and unequivocally define specific versions of wrfpp. This is **not** true for any version number that has the ".dev0" suffix (eg "v2.3.dev0").
