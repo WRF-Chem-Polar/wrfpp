@@ -70,7 +70,7 @@ constants = dict(
 
 
 def open_dataset(*args, **kwargs):
-    """Wrapper around xarray.open_mfdataset for WRF output files.
+    """Wrapper around xarray.open_dataset for WRF output files.
 
     Parameters
     ----------
@@ -87,7 +87,7 @@ def open_dataset(*args, **kwargs):
 
 
 def open_mfdataset(paths, **kwargs):
-    """Wrapper around xarray.open_mfdataset for WRF output files.
+    """Wrapper around xarray.open_dataset for WRF output files.
 
     Parameters
     ----------
