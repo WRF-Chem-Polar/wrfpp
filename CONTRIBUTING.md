@@ -27,11 +27,18 @@ Anyone is welcome to create an issue to:
 
 As far as reasonably possible, each issue should describe a single non-divisible task or improvement. If your suggested improvement or feature can be divided into multiple smaller improvements/features/tasks, then create separate issues for each of these.
 
+# First-time external contributors
+
+> [!IMPORTANT]
+> This section applies to users who are not part of the [WRF-Chem-Polar organisation](https://github.com/WRF-Chem-Polar).
+
+If you want to become a wrfpp contributor, we kindly ask you to first open a dedicated issue that briefly describes how you came to know and use wrfpp. We are seeking to create a community of wrfpp-loving users and developers, and we will refrain from accepting contributions if we suspect they come from users or AI agents that are entirely disengaged from wrfpp.
+
 # Making a pull request
 
 Before making a pull request, you must ensure that there exists a related issue. In other words, each pull request must be associated whith an existing issue. It is ok to have several pull requests associated with the same issue. The reverse is not ok. Create the issue if needed, following the instructions above.
 
-If you are not a member of the [WRF-Chem-Polar organisation](https://github.com/WRF-Chem-Polar) with triage permissions, you must get approval on the issue from one of them before starting working on the corresponding pull request.
+Only members of the [WRF-Chem-Polar organisation](https://github.com/WRF-Chem-Polar) with triage permissions can assign issues. If you want to work on an issue, you must first get it assigned to you by one of them. You can ask to get assigned an issue directly on said issue.
 
 Create and do your work on a branch named `issue##/short-description-of-issue` where `##` is the issue number without leading zeros. If you have write access to the repository, you can create the branch there directly. Otherwise create it in your own fork.
 
