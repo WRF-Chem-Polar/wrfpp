@@ -12,14 +12,16 @@ It works with native WRF and WRF-Chem outputs as well as [WRF-Chem-Polar](https:
 You can install `wrfpp` with `pip`. It is recommended to install a tagged version (eg. "v1.0"):
 
 ```sh
-pip install git+https://github.com/WRF-Chem-Polar/wrfpp.git@v1.0#egg=wrfpp
+pip install wrfpp[all]@git+https://github.com/WRF-Chem-Polar/wrfpp.git@v1.0
 ```
 
 To install the latest development version, simply omit the tag:
 
 ```sh
-pip install git+https://github.com/WRF-Chem-Polar/wrfpp.git#egg=wrfpp
+pip install wrfpp[all]@git+https://github.com/WRF-Chem-Polar/wrfpp.git
 ```
+
+You can choose not to install optional dependencies by omitting `[all]` in the instructions above. Some features of `wrfpp` will not work in this case.
 
 # Versioning
 
