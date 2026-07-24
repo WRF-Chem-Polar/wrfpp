@@ -21,7 +21,7 @@ To install the latest development version, simply omit the tag:
 pip install wrfpp[all]@git+https://github.com/WRF-Chem-Polar/wrfpp.git
 ```
 
-You can choose not to install optional dependencies by omitting `[all]` in the instructions above. Some features of `wrfpp` will not work in this case.
+You can choose not to install optional dependencies by omitting `[all]` in the commands above. Some features of `wrfpp` will not work in this case.
 
 # Versioning
 
