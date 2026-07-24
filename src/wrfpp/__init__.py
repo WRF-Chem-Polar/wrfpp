@@ -6,4 +6,4 @@
 
 """Module wrfpp: facilitate the analysis of WRF and WRF-Chem outputs."""
 
-from ._wrfpp import open_dataset, open_mfdataset, WRFDatasetAccessor
+from ._wrfpp import WRFDatasetAccessor, open_dataset, open_mfdataset
