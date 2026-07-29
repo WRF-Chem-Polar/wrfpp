@@ -25,10 +25,11 @@ The WRF model:
 
 """
 
-from abc import ABC, abstractmethod
-import warnings
 import functools
 import re
+import warnings
+from abc import ABC, abstractmethod
+
 import numpy as np
 import scipy
 import xarray as xr
@@ -351,13 +352,11 @@ class GenericDatasetAccessor(ABC):
     @abstractmethod
     def crs_pyproj(self):
         """The CRS (pyproj) corresponding to dataset."""
-        pass
 
     @property
     @abstractmethod
     def crs_cartopy(self):
         """The CRS (cartopy) corresponding to dataset."""
-        pass
 
     @property
     def crs(self):
@@ -1240,7 +1239,6 @@ class DerivedVariable(ABC):
             The derived variable for given slice.
 
         """
-        pass
 
     def __getattr__(self, name):
         return getattr(self[:], name)
