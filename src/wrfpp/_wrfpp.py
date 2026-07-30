@@ -71,7 +71,7 @@ constants = dict(
 
 
 def open_dataset(*args, **kwargs):
-    """Wrapper around xarray.open_mfdataset for WRF output files.
+    """Wrapper around xarray.open_dataset for WRF output files.
 
     Parameters
     ----------
@@ -563,7 +563,8 @@ class WRFDatasetAccessor(GenericDatasetAccessor):
         Returns
         -------
         timedelta | None
-            The file's time step (None if the file has fewer than 2 time steps).
+            The file's time step duration, or None if the file has fewer than 2
+            time steps.
 
         """
         if self.sizes["Time"] < 2:
@@ -830,7 +831,9 @@ class WRFDatasetAccessor(GenericDatasetAccessor):
         if method == "centre" or method == "center":
             extracted = self._dataset.isel(south_north=j, west_east=i)
         else:
-            # make index arrays for window**2 nearest points, making sure 0 < i < nx
+            # Create index arrays for the (window * window) nearest points,
+            # with the constraint that 0 <= i < nx (this might result in fewer
+            # than window**2 points)
             (ny, nx) = self.lonlat[0].shape
             r = window // 2
             imin, imax = max(0, i - r), min(nx, i + r + 1)
@@ -1109,47 +1112,47 @@ class WRFDatasetAccessor(GenericDatasetAccessor):
 
     @property
     def potential_temperature(self):
-        """The DerivedVariable object to calculate potential temperature."""
+        """The derived variable for potential temperature."""
         return WRFPotentialTemperature(self._dataset)
 
     @property
     def atm_pressure(self):
-        """The DerivedVariable object to calculate atmopsheric pressure."""
+        """The derived variable for atmopsheric pressure."""
         return WRFAtmPressure(self._dataset)
 
     @property
     def air_temperature(self):
-        """The DerivedVariable object to calculate air temperature."""
+        """The derived variable for air temperature."""
         return WRFAirTemperature(self._dataset)
 
     @property
     def density_of_dry_air(self):
-        """The DerivedVariable object to calculate dry air density."""
+        """The derived variable for dry air density."""
         return WRFDensityOfDryAir(self._dataset)
 
     @property
     def relative_humidity(self):
-        """The DerivedVariable object to calculate relative humidity."""
+        """The derived variable for relative humidity."""
         return WRFRelativeHumidity(self._dataset)
 
     @property
     def accumulated_precipitation(self):
-        """The DerivedVariable object to calculate accumulated total precipitation."""
+        """The derived variable for accumulated total precipitation."""
         return WRFAccumulatedPrecipitation(self._dataset)
 
     @property
     def grid_cell_area(self):
-        """The DerivedVariable object to calculate grid cell area."""
+        """The derived variable for grid cell area."""
         return WRFGridCellArea(self._dataset)
 
     @property
     def altitude_asl(self):
-        """The DerivedVariable object to calculate grid cell height above sea level."""
+        """The derived variable for grid cell height above sea level."""
         return WRFAltitudeASL(self._dataset)
 
     @property
     def altitude_agl(self):
-        """The DerivedVariable object to calculate grid cell height above ground level."""
+        """The derived variable for grid cell height above ground."""
         return WRFAltitudeAGL(self._dataset)
 
     @property
@@ -1159,52 +1162,52 @@ class WRFDatasetAccessor(GenericDatasetAccessor):
 
     @property
     def cloud_liquid_water_path(self):
-        """The DerivedVariable object to calculate cloud liquid water path."""
+        """The derived variable for cloud liquid water path."""
         return WRFCloudLiquidWaterPath(self._dataset)
 
     @property
     def ice_water_path(self):
-        """The DerivedVariable object to calculate ice water path."""
+        """The derived variable for ice water path."""
         return WRFIceWaterPath(self._dataset)
 
     @property
     def cloud_ice_water_path(self):
-        """The DerivedVariable object to calculate cloud ice water path."""
+        """The derived variable for cloud ice water path."""
         return WRFCloudIceWaterPath(self._dataset)
 
     @property
     def altitude_asl_c(self):
-        """The DerivedVariable object to calculate grid cell height centre above sea level."""
+        """The derived variable for grid cell centre height above sea level."""
         return WRFAltitudeASL_C(self._dataset)
 
     @property
     def altitude_agl_c(self):
-        """The DerivedVariable object to calculate grid cell height centre above ground level."""
+        """The derived variable for grid cell centre height above ground."""
         return WRFAltitudeAGL_C(self._dataset)
 
     @property
     def box_dz(self):
-        """The DerivedVariable object to calculate grid box dz (vertical extent)."""
+        """The derived variable for grid box vertical extent."""
         return WRFBoxDz(self._dataset)
 
     @property
     def aer_number_conc_nonact(self):
-        """The DerivedVariable object to calculate non-activated aer number conc."""
+        """The derived variable for non-activated aerosol number conc."""
         return WRFAerNumberConcNonact(self._dataset)
 
     @property
     def aer_number_conc_act(self):
-        """The DerivedVariable object to calculate activated aer number conc."""
+        """The derived variable for activated aerosol number concentration."""
         return WRFAerNumberConcAct(self._dataset)
 
     @property
     def aer_number_conc_total(self):
-        """The DerivedVariable object to calculate total aer number conc."""
+        """The derived variable for total aerosol number concentration."""
         return WRFAerNumberConcTotal(self._dataset)
 
     @property
     def fraction_activated_aerosol(self):
-        """The DerivedVariable object to calculate the fraction of activated aerosol."""
+        """The derived variable for the fraction of activated aerosol."""
         return WRFFractionActivatedAerosol(self._dataset)
 
 
@@ -1245,7 +1248,7 @@ class DerivedVariable(ABC):
 
 
 class WRFPotentialTemperature(DerivedVariable):
-    """Derived variable for potential temperature from WRF outputs."""
+    """Derived variable for potential temperature."""
 
     def __getitem__(self, *args):
         """Return the potential temperature.
@@ -1272,7 +1275,7 @@ class WRFPotentialTemperature(DerivedVariable):
 
 
 class WRFAtmPressure(DerivedVariable):
-    """Derived variable for atmospheric pressure from WRF outputs."""
+    """Derived variable for atmospheric pressure."""
 
     def __getitem__(self, *args):
         """Return the atmospheric pressure.
@@ -1300,7 +1303,7 @@ class WRFAtmPressure(DerivedVariable):
 
 
 class WRFAirTemperature(DerivedVariable):
-    """Derived variable for air temperature from WRF outputs."""
+    """Derived variable for air temperature."""
 
     def __getitem__(self, *args):
         """Return the air temperature.
@@ -1328,7 +1331,7 @@ class WRFAirTemperature(DerivedVariable):
 
 
 class WRFDensityOfDryAir(DerivedVariable):
-    """Derived variable for dry air density from WRF outputs."""
+    """Derived variable for dry air density."""
 
     def __getitem__(self, *args):
         """Return the density of dry air.
@@ -1400,7 +1403,7 @@ class WRFRelativeHumidity(DerivedVariable):
 
 
 class WRFAccumulatedPrecipitation(DerivedVariable):
-    """Derived variable for accumulated total precipitation from WRF outputs."""
+    """Derived variable for accumulated total precipitation."""
 
     def __getitem__(self, *args):
         """Return the accumulated total precipitation.
@@ -1432,7 +1435,7 @@ class WRFAccumulatedPrecipitation(DerivedVariable):
 
 
 class WRFGridCellArea(DerivedVariable):
-    """Derived variable for calcuating grid cell (box) area from WRF outputs."""
+    """Derived variable for grid cell area."""
 
     def __getitem__(self, *args):
         """grid cell (box) area.
@@ -1461,10 +1464,10 @@ class WRFGridCellArea(DerivedVariable):
 
 
 class WRFAltitudeASL(DerivedVariable):
-    """The DerivedVariable object to calculate grid altitude above sea level."""
+    """Derived variable for grid cell altitude above sea level."""
 
     def __getitem__(self, *args):
-        """Return the the grid cell altitude above sea level
+        """Return the the grid cell altitude above sea level.
 
         Parameters
         ----------
@@ -1491,10 +1494,10 @@ class WRFAltitudeASL(DerivedVariable):
 
 
 class WRFAltitudeAGL(DerivedVariable):
-    """The DerivedVariable object to calculate grid altitude above ground level."""
+    """Derived variable for grid cell altitude above ground."""
 
     def __getitem__(self, *args):
-        """Return the the grid cell altitude above ground level
+        """Return the the grid cell altitude above ground.
 
         Parameters
         ----------
@@ -1504,7 +1507,7 @@ class WRFAltitudeAGL(DerivedVariable):
         Return
         ------
         xarray.DataArray
-            The grid cell altitude above ground level in m.
+            The grid cell altitude above ground in metres.
 
         """
         wrf = self._dataset.wrf
@@ -1529,7 +1532,7 @@ class WRFAltitudeAGL(DerivedVariable):
 
 
 class WRFLiquidWaterPath(DerivedVariable):
-    """The DerivedVariable object to calculate liquid water path."""
+    """Derived variable for liquid water path."""
 
     def __getitem__(self, *args):
         """Return the liquid water path.
@@ -1561,7 +1564,7 @@ class WRFLiquidWaterPath(DerivedVariable):
 
 
 class WRFCloudLiquidWaterPath(DerivedVariable):
-    """The DerivedVariable object to calculate cloud liquid water path."""
+    """Derived variable for cloud liquid water path."""
 
     def __getitem__(self, *args):
         """Return the cloud liquid water path.
@@ -1588,7 +1591,7 @@ class WRFCloudLiquidWaterPath(DerivedVariable):
 
 
 class WRFIceWaterPath(DerivedVariable):
-    """The DerivedVariable object to calculate ice water path."""
+    """Derived variable for ice water path."""
 
     def __getitem__(self, *args):
         """Return the ice water path.
@@ -1621,7 +1624,7 @@ class WRFIceWaterPath(DerivedVariable):
 
 
 class WRFCloudIceWaterPath(DerivedVariable):
-    """The DerivedVariable object to calculate cloud ice water path."""
+    """Derived variable for cloud ice water path."""
 
     def __getitem__(self, *args):
         """Return the cloud ice water path.
@@ -1648,7 +1651,7 @@ class WRFCloudIceWaterPath(DerivedVariable):
 
 
 class WRFAltitudeASL_C(DerivedVariable):
-    """The DerivedVariable object to calculate grid centrepoint altitude above sea level."""
+    """Derived variable for grid cell centrepoint altitude above sea level."""
 
     def __getitem__(self, *args):
         """Return the the grid cell centrepoint altitude above sea level.
@@ -1681,10 +1684,10 @@ class WRFAltitudeASL_C(DerivedVariable):
 
 
 class WRFAltitudeAGL_C(DerivedVariable):
-    """The DerivedVariable object to calculate grid centrepoint altitude above ground level."""
+    """Derived variable for grid cell centrepoint altitude above ground."""
 
     def __getitem__(self, *args):
-        """Return the the grid cell centrepoint altitude ground sea level.
+        """Return the the grid cell centrepoint altitude above ground.
 
         Parameters
         ----------
@@ -1714,10 +1717,10 @@ class WRFAltitudeAGL_C(DerivedVariable):
 
 
 class WRFBoxDz(DerivedVariable):
-    """The DerivedVariable object to calculate grid box vertical extent"""
+    """Derived variable for grid box vertical extent."""
 
     def __getitem__(self, *args):
-        """Return the the WRF grid box vertical extent
+        """Return the the WRF grid box vertical extent.
 
         Parameters
         ----------
@@ -1727,7 +1730,7 @@ class WRFBoxDz(DerivedVariable):
         Return
         ------
         xarray.DataArray
-            The grid cell vertical extent.
+            The grid cell vertical extent in meters.
 
         """
         asl = self._dataset.wrf.altitude_asl
@@ -1745,7 +1748,7 @@ class WRFBoxDz(DerivedVariable):
 
 
 class WRFAerNumberConcNonact(DerivedVariable):
-    """WRF derived variable for non-activated aerosol number conc."""
+    """Derived variable for non-activated aerosol number conc."""
 
     def __getitem__(self, *args):
         """Return the number concentration of non-activated aerosol (all bins).
@@ -1783,7 +1786,7 @@ class WRFAerNumberConcNonact(DerivedVariable):
 
 
 class WRFAerNumberConcAct(DerivedVariable):
-    """WRF derived variable for activated aerosol number conc."""
+    """Derived variable for activated aerosol number concentration."""
 
     def __getitem__(self, *args):
         """Return the number concentration of activated aerosol (all bins).
@@ -1821,7 +1824,7 @@ class WRFAerNumberConcAct(DerivedVariable):
 
 
 class WRFAerNumberConcTotal(DerivedVariable):
-    """WRF derived variable for total aerosol number concentration."""
+    """Derived variable for total aerosol number concentration."""
 
     def __getitem__(self, *args):
         """Return the total number concentration of aerosol (all bins).
@@ -1849,7 +1852,7 @@ class WRFAerNumberConcTotal(DerivedVariable):
 
 
 class WRFFractionActivatedAerosol(DerivedVariable):
-    """WRF derived variable for the fraction of activated aerosol."""
+    """Derived variable for the fraction of activated aerosol."""
 
     def __getitem__(self, *args):
         """Return the fraction of activated aerosol.
