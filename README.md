@@ -2,7 +2,7 @@ The python package wrfpp (think "WRF post-processing") facilitates the analysis 
 
 It was originally part of our [WRF-infra](https://github.com/WRF-Chem-Polar/WRF-infra) repository but is now a stand-alone Python package.
 
-It works with native WRF and WRF-Chem outputs as well as [WRF-Chem-Polar](https://github.com/WRF-Chem-Polar/WRF-Chem-Polar) outputs.
+It works with [native WRF and WRF-Chem](https://github.com/wrf-model/WRF) outputs as well as [WRF-Chem-Polar](https://github.com/WRF-Chem-Polar/WRF-Chem-Polar) outputs.
 
 # Installing wrfpp
 
