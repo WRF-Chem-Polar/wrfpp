@@ -57,15 +57,16 @@ else:
 # The following constants that are marked with ** use the same values as in
 # the WRF model code (WRF/share/module_model_constants.F). We use SI units for
 # all constants
-constants = dict(
-    pot_temp_t0=300,  # Base state potential temperature (K)**
-    pot_temp_p0=1e5,  # Base state surface pressure for potential temp. (Pa)**
-    r_air=287,  # Specific gas constant of dry air (J kg-1 K-1)**
-    cp_air=1004.5,  # Heat cap. of dry air at constant pressure (J kg-1 K-1)**
-    mm_dryair=28.966e-3,  # Molar mass of dry air (kg mol-1)**
-    mm_water=18.015e-3,  # Molar mass of water (kg mol-1)
-    grav_accel=9.81,  # Gravitational constant in (m s-2)
-)
+constants = {
+    "pot_temp_t0": 300,  # Base state potential temperature (K)**
+    "pot_temp_p0": 1e5,  # Base state surface pressure for potential temp. (Pa)**
+    "r_air": 287,  # Specific gas constant of dry air (J kg-1 K-1)**
+    "cp_air": 1004.5,  # Heat cap. of dry air at constant pressure (J kg-1 K-1)**
+    "mm_dryair": 28.966e-3,  # Molar mass of dry air (kg mol-1)**
+    "mm_water": 18.015e-3,  # Molar mass of water (kg mol-1)
+    "grav_accel": 9.81,  # Gravitational constant (m s-2)**
+    "earth_radius": 6370e3,  # Earth radius (m)**
+}
 
 # Wrappers to xarray functionality
 
@@ -456,13 +457,14 @@ class WRFDatasetAccessor(GenericDatasetAccessor):
             raise ValueError("Inconsistency in central longitude values.")
         if self.attrs["MOAD_CEN_LAT"] != self.attrs["CEN_LAT"]:
             raise ValueError("Inconsistency in central latitude values.")
-        proj = dict(
-            proj="lcc",
-            lat_0=self.attrs["CEN_LAT"],
-            lon_0=self.attrs["CEN_LON"],
-            lat_1=self.attrs["TRUELAT1"],
-            lat_2=self.attrs["TRUELAT2"],
-        )
+        proj = {
+            "proj": "lcc",
+            "lat_0": self.attrs["CEN_LAT"],
+            "lon_0": self.attrs["CEN_LON"],
+            "lat_1": self.attrs["TRUELAT1"],
+            "lat_2": self.attrs["TRUELAT2"],
+            "R": constants["earth_radius"],
+        }
         return pyproj.CRS.from_dict(proj)
 
     @property
@@ -479,12 +481,13 @@ class WRFDatasetAccessor(GenericDatasetAccessor):
             raise ValueError("Invalid value for MAP_PROJ_CHAR.")
         if self.attrs["STAND_LON"] != self.attrs["CEN_LON"]:
             raise ValueError("Inconsistency in central longitude values.")
-        proj = dict(
-            proj="stere",
-            lat_0=self.attrs["POLE_LAT"],
-            lat_ts=self.attrs["TRUELAT1"],
-            lon_0=self.attrs["CEN_LON"],
-        )
+        proj = {
+            "proj": "stere",
+            "lat_0": self.attrs["POLE_LAT"],
+            "lat_ts": self.attrs["TRUELAT1"],
+            "lon_0": self.attrs["CEN_LON"],
+            "R": constants["earth_radius"],
+        }
         return pyproj.CRS.from_dict(proj)
 
     @property
@@ -503,7 +506,10 @@ class WRFDatasetAccessor(GenericDatasetAccessor):
                 false_easting=proj["x_0"],
                 false_northing=proj["y_0"],
                 standard_parallels=(proj["lat_1"], proj["lat_2"]),
-                globe=cartopy.crs.Globe(datum=proj["datum"]),
+                globe=cartopy.crs.Globe(
+                    semimajor_axis=proj["R"],
+                    semiminor_axis=proj["R"],
+                ),
             )
         elif proj["proj"] == "stere":
             crs = cartopy.crs.Stereographic(
@@ -512,7 +518,10 @@ class WRFDatasetAccessor(GenericDatasetAccessor):
                 false_easting=proj["x_0"],
                 false_northing=proj["y_0"],
                 true_scale_latitude=proj["lat_ts"],
-                globe=cartopy.crs.Globe(datum=proj["datum"]),
+                globe=cartopy.crs.Globe(
+                    semimajor_axis=proj["R"],
+                    semiminor_axis=proj["R"],
+                ),
             )
         else:
             raise ValueError("Unsupported projection: %s." % proj["proj"])
